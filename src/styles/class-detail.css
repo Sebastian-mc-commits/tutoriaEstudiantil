@@ -1,0 +1,62 @@
+body {
+  background-image: url("../assets/images/study.jpg");
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: var(--ISlateCharcoal);
+}
+
+.classValuesContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: var(--ISlateCharcoal);
+  padding: 1rem;
+}
+
+.classValues {
+  background-color: var(--ICeruleanBlue);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.scheduleRenderStyles {
+  margin: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.scheduleRenderStyles a div {
+  color: var(--black);
+}
+
+.card {
+  border: none;
+}
+
+.class-detail-contents {
+  background-color: var(--C_greenishBlue);
+  padding: 1rem;
+}
+
+.registerButton {
+    background-color: var(--IElectricBlue);
+    font-weight: bold;
+    color: var(--white);
+}
+
+.not-registered {
+    background-color: var(--white);
+    padding: 2rem;
+}
+
+.suggestScheduleButton {
+  background-color: var(--C_brightYellow);
+  cursor: pointer;
+  font-weight: bold;
+}

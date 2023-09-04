@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+}
+
+.createClassContainer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.createClassContainer section {
+  padding: 1rem;
+  width: 100%;
+  z-index: 5;
+  align-self: center;
+  margin-top: 8rem;
+  display: flex;
+}
+
+.class_schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.addSchedule {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 100%;
+  max-height: 95%;
+  overflow: auto;
+}
+
+.addSchedule p {
+  cursor: pointer;
+}
+
+.createClassContainer::before {
+  position: absolute;
+  content: " ";
+  /* left: 0; */
+  width: 50%;
+  height: 100vh;
+  z-index: 3;
+  background-color: var(--C_turquoise);
+}
+
+.createClassContainer::after {
+  content: " ";
+  position: absolute;
+  width: 50%;
+  height: 100vh;
+  right: 0;
+  background-color: var(--C_greenishBlue);
+}
+
+.createClassContainer section form label {
+  width: 100%;
+}
+
+.card {
+  margin: 2rem;
+}
+
+.classComponentStyle {
+  color: var(--black);
+}
+
+.schedule-created {
+  background-color: var(--C_greenishBlue);
+  color: var(--white);
+}
+
+.access-link {
+  color: var(--IElectricBlue);
+}

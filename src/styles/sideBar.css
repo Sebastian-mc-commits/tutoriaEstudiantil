@@ -1,0 +1,77 @@
+:root {
+    --hideBarAnimationTime: 0.6s;
+    --hideBarLeftAnimationTime: 20rem;
+}
+
+.contentBody {
+    margin-left: var(--hideBarLeftAnimationTime);
+    margin-top: 15rem;
+    transition: margin var(--hideBarAnimationTime);
+}
+
+.sideBarContainer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 18rem;
+    background-color: var(--ISlateCharcoal);
+    transition: left 0.5s;
+}
+
+.sideBarContainer ul.sideBarMethods {
+    margin-top: var(--barHeight);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 40%;
+    list-style: none;
+    color: var(--white);
+    padding: 0;
+}
+
+.sideBarContainer ul.sideBarMethods li {
+    line-height: 4rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    padding: 1rem;
+    transition: background-color 1s;
+}
+
+.sideBarContainer ul.sideBarMethods li:hover {
+    background-color: var(--lightSalmon);
+    opacity: 0.7;
+
+}
+
+.sideBarContainer ul.sideBarMethods li button {
+    color: var(--white);
+    background-color: var(--C_greenishBlue);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.sideBarIcon {
+    position: fixed;
+    top: var(--barHeight);
+    left: var(--hideBarLeftAnimationTime);
+    background-color: var(--ISlateCharcoal);
+    color: var(--white);
+    font-weight: bold;
+    padding: 1.2rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: transform var(--hideBarAnimationTime);
+}
+
+#handleHideBar:checked ~ .sideBarContainer {
+    left: -18rem;
+}
+
+#handleHideBar:checked ~ .sideBarIcon {
+    transform: translateX(-18rem) rotate(-180deg);
+}
+
+#handleHideBar:checked ~ .contentBody {
+    margin-left: 0;
+}

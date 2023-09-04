@@ -1,0 +1,11 @@
+.classList {
+    display: grid;
+    grid-template-columns: repeat(3, calc(90% / 3));
+    gap: calc(10% / 3);
+    margin-top: 1rem;
+    margin: 2rem;
+}
+
+.tutorFields {
+    color: var(--black);
+}

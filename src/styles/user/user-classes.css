@@ -1,0 +1,38 @@
+.card {
+  background-color: var(--C_turquoise);
+  border: none;
+}
+
+.classesContainer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: var(--C_greenishBlue);
+  overflow: auto;
+  padding: 2rem;
+}
+
+.classesContainer .classRender {
+  margin-top: 5rem;
+}
+
+.classComponent {
+  color: var(--white);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.renderScheduleOps {
+  background-color: var(--C_yellowGreen);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.borderCard {
+  color: var(--ISlateCharcoal);
+}

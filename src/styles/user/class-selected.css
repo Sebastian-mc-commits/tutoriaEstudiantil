@@ -1,0 +1,51 @@
+.card {
+  border: none;
+}
+
+.borderCard {
+  color: var(--ISlateCharcoal);
+}
+
+.classContainer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-image: url("../../assets/images/books.jpg");
+  background-position: bottom center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: auto;
+}
+
+.classRender {
+  margin: 5rem;
+  margin-top: 7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.mainSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mentoringSection {
+  max-width: 50%;
+  background-color: var(--C_brightYellow);
+}
+
+.scheduleSection {
+  background-color: var(--C_shadePale);
+}
+
+.tutorSection {
+  background-color: var(--C_yellowGreen);
+}
+
+.rateSection {
+  background-color: var(--C_greenishBlue);
+}

@@ -1,0 +1,59 @@
+.sectionRender {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.classDetail {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-around;
+}
+
+.classDetail form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+.classDetail form label input, .classDetail form label textarea {
+    width: 70%;
+    
+}
+
+.inputTitle {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.schedulesRenderContainer {
+    background-color: var(--C_greenishBlue);
+    border: none;
+}
+
+.schedulesRenderer {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.sectionNeeds {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+
+.danger {
+    background-color: var(--danger);
+    color: var(--white);
+    font-weight: bold;
+}
+
+.primary {
+    background-color: var(--ICeruleanBlue);
+    color: var(--white);
+    font-weight: bold;
+}

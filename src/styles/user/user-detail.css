@@ -1,0 +1,69 @@
+.userDetailContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  margin: 4rem;
+}
+
+.userOptions {
+  background-color: var(--C_greenishBlue);
+}
+
+.userOptions a {
+  color: var(--white);
+  font-weight: bold;
+}
+
+.userOptions .options {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;  
+}
+
+.borderCard {
+  background-color: var(--C_turquoise);
+  padding: 1rem;
+}
+
+.mentorOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttonSelectClass {
+  background-color: var(--ISlateCharcoal);
+  color: var(--white);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.buttonLogOut {
+  background-color: var(--danger);
+  color: var(--white);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.suggestedSchedulesContainerButton {
+  position: relative;
+}
+
+.suggestedSchedules {
+  position: absolute;
+  background-color: var(--danger);
+  top: -70%;
+  right: -10%;
+  padding: 1rem;
+  border: none;
+  color: var(--white);
+  font-weight: bold;
+  text-align: center;
+  z-index: 10;
+}
+
+.suggestedSchedulesContainerButton {
+  color: var(--white);
+  font-weight: bold;
+  text-align: center;
+}

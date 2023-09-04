@@ -1,0 +1,33 @@
+.displayPassword {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+.displayPassword:after {
+  content: " ";
+  height: 100%;
+  position: absolute;
+  right: 0;
+  width: 100vw;
+  background-color: yellow;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  z-index: 10;
+  opacity: 0.2;
+}
+
+.no-after::after {
+  content: none;
+}
+
+.displayPasswordButton {
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 15;
+}
+
+.inputContainer {
+  display: flex;
+  gap: 1rem;
+}

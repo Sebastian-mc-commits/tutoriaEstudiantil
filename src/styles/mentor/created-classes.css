@@ -1,0 +1,16 @@
+.classRenderContainer {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 5rem;
+}
+
+.classRenderContainer section {
+  width: 1/5;
+  color: var(--white);
+  font-weight: bold;
+}
+
+.card {
+  border: none;
+}

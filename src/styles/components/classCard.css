@@ -1,0 +1,7 @@
+.classComponentStyle {
+  border-radius: var(--radius);
+  padding: 1rem;
+  cursor: pointer;
+  color: var(--white);
+  width: 100%;
+}

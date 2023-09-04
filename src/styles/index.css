@@ -1,0 +1,192 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+:root {
+  --radius: 7px;
+  --gray: gray;
+  --ISlateCharcoal: #3a3840;
+  --IElectricBlue: #0540f2;
+  --ICeruleanBlue: #4b75f2;
+  --IPowderBlue: #a0bbf2;
+  --PeriwinkleBlue: #bbcdf2;
+  --white: #fff;
+  --black: #000;
+  --C_turquoise: #042940;
+  --C_greenishBlue: #005C53;
+  --C_yellowGreen: #9FC131;
+  --C_brightYellow: #DBF227;
+  --C_shadePale: #D6D58E;
+  --danger: #8C1F28;
+  --orange: #F28705;
+  --barHeight: 7rem;
+  --lightSalmon: #FFA07A;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+.mainStyles {
+  margin-top: 7rem;
+}
+
+input, .button, select {
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.button {
+  cursor: pointer;
+}
+
+input:not(input[type="submit"]) {
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--ICeruleanBlue);
+}
+
+input:not(input[type="submit"]):hover {
+  border-bottom: 1px solid var(--IPowderBlue);
+  opacity: 0.8;
+}
+
+input:not(input[type="submit"]):focus {
+  outline: 1px solid black;
+  border: none;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+  width: 100%;
+  background-color: var(--IPowderBlue);
+  font-weight: bolder;
+  color: var(--white);
+}
+
+input[type="submit"]:hover {
+  background-color: var(--PeriwinkleBlue);
+}
+
+input[type="submit"]:disabled {
+  background-color: var(--ISlateCharcoal);
+  cursor: no-drop;
+  opacity: 0.7;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem;
+  align-items: center;
+}
+
+label span {
+  color: var(--gray);
+  opacity: 0.7;
+}
+
+textarea {
+  border-radius: var(--radius);
+  outline: none;
+  padding: 1rem;
+  border-color: var(--PeriwinkleBlue);
+}
+
+a {
+  color: var(--IElectricBlue);
+  text-decoration: none;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #fff;
+}
+
+.borderCard {
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  background-color: var(--white);
+  border: none;
+  border-left: 10px solid var(--gray);
+}
+
+.textOpacity {
+  color: var(--gray);
+  opacity: 0.8;
+}
+
+.container {
+  margin: auto;
+}
+
+.opacityHover:hover {
+  transition: all 0.5s;
+  opacity: 0.7;
+  border: 1px black solid;
+}
+
+@keyframes hoverButton {
+  from {
+    border: 2px black solid;
+  }
+
+  to {
+    border: 2px var(--gray) solid;
+  }
+}
+
+.hoverAnimation:hover {
+  /* color: var(--dark-dusky); */
+  transition: all 0.5s;
+  animation: hoverButton infinite 0.5s ease-in-out;
+  animation-direction: alternate;
+}
+
+.button-yellow-green {
+  cursor: pointer;
+  background-color: var(--C_yellowGreen);
+  font-weight: bold;
+  color: var(--white);
+}
+
+.wholeView {
+  position: absolute;
+  width: 100vw;
+  height: 100vw;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  border: none;
+  overflow: auto;
+  margin: auto;
+}
+
+.loader {
+  /* Finally, a use for "groove"! */
+  border: 24px groove rebeccapurple;
+
+  display: table-cell;
+  border-radius: 999px;
+  animation: spin 15s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg) }
+  to { transform: rotate(360deg) }
+}

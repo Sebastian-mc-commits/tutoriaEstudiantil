@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/index.css" />
+  </head>
+
+  <style>
+    form {
+      width: 40%;
+      margin-top: 50%;
+    }
+  </style>
+  <body>
+    <form action="#" method="post">
+      <label for="password" class="passwordContainer">
+        <span>Hello</span>
+        <div>
+          <input
+            class="inputPassword"
+            type="password"
+            placeholder="Password"
+            id="password"
+          />
+          <div id="displayPasswordAfter">
+            <button
+              class="button"
+              id="displayPassword"
+            ></button>
+          </div>
+        </div>
+      </label>
+    </form>
+
+    <script type="module">
+      import { DisplayPassword } from "../js/components/index.js";
+
+      const inputElement = document.querySelector("#password");
+      const displayPasswordOps = {
+        buttonElement: document.querySelector("#displayPassword"),
+        containerElement: document.querySelector("#displayPasswordAfter"),
+        inputElement,
+      };
+      const displayPasswordComponent = new DisplayPassword(displayPasswordOps);
+
+      displayPasswordComponent.init();
+      console.log(inputElement.closest("div"));
+    </script>
+  </body>
+</html>
