@@ -91,6 +91,69 @@ if ($type != null || $user != null) {
                 exit;
             }
 
+        case "addScheduleJson": {
+                $data = Controller\getJson();
+                $data[$scheduleI->isAccepted] = 1;
+                $isAdded = $scheduleI->create($data);
+
+                header("Content-Type: application/json");
+                echo json_encode([
+                    "isAdded" => $isAdded,
+                ]);
+                exit;
+            }
+
+        case "getScheduleByIdJson": {
+                $schedule = $scheduleI->findOne([
+                    "where" => [
+                        $scheduleI->id => [$_GET["id"], "equal"]
+                    ]
+                ]);
+                header("Content-Type: application/json");
+                echo json_encode([
+                    "schedule" => $schedule,
+                ]);
+                exit;
+            }
+
+        case "updateScheduleJson": {
+
+                // ["id" => $id, "date" => $date, "endsIn" => $endsIn, "accessLink" => $accessLink, "description" => $description] = Controller\getJson();
+                $data = Controller\getJson();
+                $id = $data["id"];
+                unset($data["id"]);
+
+                $isUpdated = $scheduleI->update([
+                    "where" => [
+                        $scheduleI->id => [$id, "equal"]
+                    ],
+                    "set" => $data
+                ]);
+
+                header("Content-Type: application/json");
+                echo json_encode([
+                    "isUpdated" => $isUpdated,
+                ]);
+                exit;
+            }
+
+        case "deleteScheduleJson": {
+
+                ["id" => $id] = Controller\getJson();
+
+                $isDeleted = $scheduleI->delete([
+                    "where" => [
+                        $scheduleI->id => [$id, "equal"]
+                    ]
+                ]);
+
+                header("Content-Type: application/json");
+                echo json_encode([
+                    "isDeleted" => $isDeleted,
+                ]);
+                exit;
+            }
+
         default:
             break;
     }

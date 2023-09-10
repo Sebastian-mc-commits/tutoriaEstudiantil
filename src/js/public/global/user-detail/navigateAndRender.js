@@ -1,9 +1,9 @@
 import { navigation, domUtilities, multipleFetch } from "../../../helpers/index.js"
 
 const { getFile } = navigation
-const { setHTML, useLoader, disableLoader } = domUtilities
+const { setHTML, useLoader, disableLoader, scrollBy, scrollViewNavigate } = domUtilities
 
-export const navigateToCreatedClasses = async ({ context: { scrollBy }, target }) => {
+export const navigateToCreatedClasses = async ({ target }) => {
     const createdClassesContainer = document.querySelector("#createdClasses")
 
     useLoader(target)
@@ -51,7 +51,7 @@ export const navigateToCreatedClasses = async ({ context: { scrollBy }, target }
 
 }
 
-export const navigateToTodaysClasses = async ({ context: { scrollViewNavigate }, target }) => {
+export const navigateToTodaysClasses = async ({ target }) => {
     const todaysClassesContainer = document.querySelector("#todaysClasses")
     useLoader(target)
 
@@ -96,7 +96,7 @@ export const navigateToTodaysClasses = async ({ context: { scrollViewNavigate },
 
 }
 
-export const moveCreatedClassesContainer = ({ context: { scrollBy } }) => {
+export const moveCreatedClassesContainer = () => {
     const createdClassesContainer = document.querySelector("#createdClasses")
     scrollBy(createdClassesContainer, {
         x: "-100%",

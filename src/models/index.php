@@ -147,6 +147,24 @@ abstract class IndexModel extends InitDb
         return $returnValue;
     }
 
+    public function delete ($params, $closeConnection = true) {
+        ["where" => $where] = $this->_filterExpectedValues(
+            $params,
+            "where",
+        );
+
+        $newWhere = $this->setWhereStatementToQuery($where);
+
+        $query = "DELETE FROM $this->modelName" . (empty($newWhere) ? "" : " WHERE $newWhere");
+
+        $isDeleted = $this->getConnection()->query($query);
+        if ($closeConnection) {
+            $this->closeConnection();
+        }
+
+        return $isDeleted;
+    }
+
     public function createAndGet($fieldSelector, $data, $closeConnection = true)
     {
         $conn = $this->getConnection();

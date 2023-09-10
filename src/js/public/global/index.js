@@ -1,5 +1,5 @@
 import OnClickHandler from "./onClickHandler.js";
-export const main = document?.querySelector("#mainContainer")
+export const main = document?.querySelectorAll("#mainContainer")
 
 const datasets = {
   render: {
@@ -24,39 +24,43 @@ const init = () => {
     datasetType
   })
 
-  main?.addEventListener("click", (event) => {
-    onClickHandler.setReducer({
-      event
-    })
-  });
+  const mainContainers = Array.from(main)
 
-//   const {
-//     dataset,
-//     datasetType
-//   } = datasets.render
-//   const render = Array.from(document.querySelectorAll(dataset) || [])
-// 
-//   if (render.length) {
-//     render.forEach(el => {
-//       toggleOverlayElement(el.parentNode)
-//     })
-//   }
-//   isReducerReady.onHandlerChangeValue = () => {
-// 
-//     if (render.length) {
-//       render.forEach(target => {
-//         callReducer({
-//           event: {
-//             target
-//           },
-//           datasetType,
-//           dataset,
-//           datasetsContext: datasets
-//         })
-//         toggleOverlayElement(target.parentNode)
-//       })
-//     }
-//   }
+  mainContainers.forEach(child => {
+    child?.addEventListener("click", (event) => {
+      onClickHandler.setReducer({
+        event
+      })
+    });
+  })
+
+  //   const {
+  //     dataset,
+  //     datasetType
+  //   } = datasets.render
+  //   const render = Array.from(document.querySelectorAll(dataset) || [])
+  // 
+  //   if (render.length) {
+  //     render.forEach(el => {
+  //       toggleOverlayElement(el.parentNode)
+  //     })
+  //   }
+  //   isReducerReady.onHandlerChangeValue = () => {
+  // 
+  //     if (render.length) {
+  //       render.forEach(target => {
+  //         callReducer({
+  //           event: {
+  //             target
+  //           },
+  //           datasetType,
+  //           dataset,
+  //           datasetsContext: datasets
+  //         })
+  //         toggleOverlayElement(target.parentNode)
+  //       })
+  //     }
+  //   }
 }
 
 if (main) {

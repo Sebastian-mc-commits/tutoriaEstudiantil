@@ -51,19 +51,3 @@ classValues.current.name = {
 classValues.current.description = {
   oninput: oninput("description")
 }
-
-const f = async () => {
-  const request = await fetch("../controllers/ClassController.php?type=createClass", {
-    headers: {
-      "Content-Type": "application/json"
-    },
-    method: "POST",
-    body: JSON.stringify(onSubmitData.current)
-  })
-
-  console.log(request)
-  const j = await request.json()
-  console.log(j)
-}
-
-// f().then(() => console.log("good")).catch(e => console.log(`Error: ${e.message}`))

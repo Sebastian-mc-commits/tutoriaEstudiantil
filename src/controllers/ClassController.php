@@ -43,7 +43,7 @@ if ($tutor != null) {
 
         if ($hasError) {
           $rollback();
-          return;
+        return;
         }
 
         $inserted = $newSchedules->bulkCreate([
@@ -86,6 +86,41 @@ if ($tutor != null) {
         ]);
         exit;
       }
+
+    case "deleteClassJson": {
+      ["id" => $id] = Controller\getJson();
+      $isDeleted = $newClass->delete([
+        "where" => [
+          $newClass->id => [$id, "equal"]
+        ]
+      ]);
+
+      header("Content-type: application/json");
+        echo json_encode([
+          "isDeleted" => $isDeleted
+        ]);
+        exit;
+    }
+
+    case "updateClassJson": {
+      $data = Controller\getJson();
+      $id = $data["id"];
+
+      unset($data["id"]);
+      $isUpdated = $newClass->update([
+        "where" => [
+          $newClass->id => [$id, "equal"]
+        ],
+        "set" => $data
+      ]);
+
+      header("Content-type: application/json");
+        echo json_encode([
+          "isUpdated" => $isUpdated,
+          "data" => $data
+        ]);
+        exit;
+    }
     default:
       break;
   }

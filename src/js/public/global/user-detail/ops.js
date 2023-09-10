@@ -21,27 +21,3 @@ export const acceptSchedule = async ({ getContextId, target }) => {
         target.parentElement.remove()
     }
 }
-
-export const scrollViewNavigate = (container, backgroundColor = "var(--ISlateCharcoal)") => {
-    
-    container.hidden = false
-    
-    container.scrollIntoView({
-        behavior: "smooth"
-    })
-    
-    document.body.style.backgroundColor = backgroundColor
-}
-
-export const goBack = ({target}) => {
-    const container = target.parentElement
-    
-    document.body.style.backgroundColor = "#FFF"
-    
-    container.hidden = true
-}
-
-export const scrollBy = (container, { x, y }) => {
-
-    container.style.transform = `translate(${x}, ${y})`
-}

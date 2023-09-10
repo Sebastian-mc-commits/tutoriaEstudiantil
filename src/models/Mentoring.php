@@ -126,7 +126,7 @@ class Mentoring extends IndexModel
         };
     }
 
-    private function mentoringAndScheduleQuery ($scheduleI, $rateI, $userI, $whereStatement) {
+    private function mentoringAndScheduleQuery ($scheduleI, $rateI, $userI, $whereStatement = null) {
 
         return "SELECT mt.mentoringName, mt.description AS mentoringDescription,"
         .
@@ -143,8 +143,7 @@ class Mentoring extends IndexModel
         " INNER JOIN $rateI->modelName rt ON rt.scheduleId = s.id"
         .
         " INNER JOIN $userI->modelName us ON us.id = rt.userId"
-        .
-        " WHERE s.isAccepted = 0" . $whereStatement;
+        . $whereStatement;
     }
 
     public function getClassesUsersAndSchedulesNotAccepted($getById = null)
@@ -154,13 +153,18 @@ class Mentoring extends IndexModel
         $userI = new User();
         $tutorI = new TutorFields();
         $tutor = $tutorI->getTutor();
+
+        if (empty($tutor)) {
+            return null;
+        }
+
         $tutorId = $tutor->tutorId;
 
         $whereStatement = "";
         if (!empty($getById)) {
             $whereStatement = " AND mt.id = $getById";
         }
-        $whereStatement .= " AND mt.tutorCreator = $tutorId";
+        $whereStatement .= " WHERE s.isAccepted = 0 AND mt.tutorCreator = $tutorId";
         $query = $this->mentoringAndScheduleQuery($scheduleI, $rateI, $userI, $whereStatement);
         $result = [];
 

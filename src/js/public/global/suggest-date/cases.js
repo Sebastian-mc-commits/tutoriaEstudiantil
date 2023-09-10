@@ -34,8 +34,6 @@ export const onScheduleReady = async (form) => {
     buttonTarget.disabled = true
     const result = await request?.json()
 
-    console.log("result")
-    console.log(result)
     if (request.ok && "status" in result && result.status) {
         buttonTarget.textContent = "Horario sugerido"
         return

@@ -21,7 +21,7 @@ $specializations = $specializationI->findAll();
               ]); ?>" method="post" class="mentorFieldsContainer card">
 
   <label for="">
-    <span>Especializaciones disponibles</span>
+    <span>¿Cual es tu especializacion?</span>
     <select name="<?php echo $tutorI->specialization; ?>">
       <?php
       while ($row = $specializations->fetch_assoc()) {

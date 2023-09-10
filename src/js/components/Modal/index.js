@@ -74,7 +74,7 @@ export default class Modal extends Global {
     const {
       modalBody,
     } =
-      this._getComponent();
+    this._getComponent();
 
     return modalBody.firstElementChild;
   }
@@ -92,7 +92,7 @@ export default class Modal extends Global {
           modalBody,
           modalFooterClose
         } =
-          this._getComponent();
+        this._getComponent();
         this.#modalHeader.apply(
           null,
           this._insertParams({
@@ -135,8 +135,17 @@ export default class Modal extends Global {
     toggleOverlay(this.#overlayId);
   };
 
-  toggleModal = () => {
+  toggleModal = (onToggleModalParams = {}) => {
     if (!this.isModalBuild) return
+
+    if (Object.keys(onToggleModalParams).length) {
+      for (const key in onToggleModalParams) {
+        const object = onToggleModalParams[key]
+
+        object(this._getComponent()[key])
+      }
+    }
+
     const {
       modal
     } = this._getComponent();

@@ -20,8 +20,17 @@ $navigate = fn ($id) => navigation("class-list", ["id" => $id]);
 
 <nav class="classList">
     <?php
-    while ($row = $availableMentoring->fetch_assoc()) {
-    ?>
+    if ($availableMentoring->num_rows == 0) {   
+        ?>
+        <section class="card container">
+            <h3 class="textOpacity">No hay clases disponibles</h3>
+        </section>
+    <?php
+    }
+    else {
+
+        while ($row = $availableMentoring->fetch_assoc()) {
+            ?>
         <a href="<?php echo $navigate($row[$mentoringInstance->idType]) ?>">
             <section class='classComponentStyle opacityHover' id="randomColorElement" role="link">
                 <h2><?php echo $row[$mentoringInstance->mentoringNameType] ?></h2>
@@ -32,8 +41,9 @@ $navigate = fn ($id) => navigation("class-list", ["id" => $id]);
                 </div>
             </section>
         </a>
-    <?php
+        <?php
     }
+}
     ?>
 </nav>
 

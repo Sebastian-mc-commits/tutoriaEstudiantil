@@ -1,5 +1,6 @@
 import {
-  utilities
+  utilities,
+  domUtilities
 } from "../../helpers/index.js"
 import reducer from "./reducer.js"
 
@@ -7,6 +8,9 @@ const {
   getId
 } = utilities
 
+const {
+  convertToDataset
+} = domUtilities
 export default class {
 
   #dataset
@@ -28,14 +32,14 @@ export default class {
 
   #getContextIds = () => Array.from(document.querySelectorAll("[data-global-id]"))
 
-  #getContextId = (target, getElement, parent) => {
+  #getContextId = (target, dataset, getElement, parent) => {
     let element = parent ? target.closest(parent) : target
 
     if (!element?.dataset.globalId) {
-      element = parent ? element?.querySelector("[data-global-id]") : element?.closest("[data-global-id]")
+      element = parent ? element?.querySelector(dataset) : element?.closest(dataset)
     }
 
-    return getElement ? element : getId(element?.dataset.globalId)
+    return getElement ? element : getId(element.dataset[convertToDataset(dataset)])
   }
 
   #getFormData = (target) => {
@@ -84,8 +88,8 @@ export default class {
       getRenderContext: () => this.#getContext(render.dataset),
       getRenderElementContext: (type) => this.#getElementContext(type, render.dataset, render.datasetType),
       getContextIds: this.#getContextIds,
-      getContextId: (getElement, parent, tr = target) => this.#getContextId(tr, getElement, parent),
-      getFormData: () => this.#getFormData(target),
+      getContextId: (getElement, dataset = "[data-global-id]", parent, tr = target) => this.#getContextId(tr, dataset, getElement, parent),
+      getFormData: this.#getFormData,
       ...props
     })
   }

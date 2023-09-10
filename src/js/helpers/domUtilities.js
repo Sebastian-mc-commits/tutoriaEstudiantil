@@ -75,3 +75,22 @@ export const disableLoader = (target) => {
 
     loader.remove()
 }
+
+export const scrollViewNavigate = (container, backgroundColor = "var(--ISlateCharcoal)") => {
+    
+    container.hidden = false
+    
+    container.scrollIntoView({
+        behavior: "smooth"
+    })
+    
+    document.body.style.backgroundColor = backgroundColor
+}
+
+export const scrollBy = (container, { x, y }) => {
+
+    container.style.transform = `translate(${x}, ${y})`
+}
+
+export const convertToDataset = (string = "") => string.replace(/[\[\]]/g, '').split("-").slice(1).map((st, index) =>
+index === 0 ? st : st[0].toUpperCase() + st.substring(1, st.length)).join("")

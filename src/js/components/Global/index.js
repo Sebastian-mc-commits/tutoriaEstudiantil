@@ -114,4 +114,5 @@ export default class Global {
     } = this._getComponent()
     callback(body, this.#componentBodyChildId);
   }
+
 }

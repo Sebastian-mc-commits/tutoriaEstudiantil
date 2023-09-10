@@ -53,27 +53,27 @@ CREATE TABLE tutorFields (
 	userId INT DEFAULT 1,
 	specialization INT,
 	CONSTRAINT FOREIGN KEY(userId) REFERENCES user(id),
-	CONSTRAINT FOREIGN KEY(specialization) REFERENCES available_specializations(id),
+	CONSTRAINT FOREIGN KEY(specialization) REFERENCES available_specializations(id) ON DELETE SET NULL,
 	PRIMARY KEY (id)
 );
 
-DELIMITER //;
-CREATE TRIGGER create_tutor_fields
-BEFORE INSERT ON tutorFields
-FOR EACH ROW
-BEGIN
-	DECLARE userType VARCHAR(30);
+-- DELIMITER //;
+-- CREATE TRIGGER create_tutor_fields
+-- BEFORE INSERT ON tutorFields
+-- FOR EACH ROW
+-- BEGIN
+-- 	DECLARE userType VARCHAR(30);
 
-	SELECT ut.type INTO userType
-	FROM user us
-	RIGHT JOIN userTypes ut ON us.userType = ut.id
-	WHERE us.id = NEW.userId;
+-- 	SELECT ut.type INTO userType
+-- 	FROM user us
+-- 	RIGHT JOIN userTypes ut ON us.userType = ut.id
+-- 	WHERE us.id = NEW.userId;
 
-	IF userType != 'tutor' THEN
-	ROLLBACK;
-	END IF;
-END //;
-DELIMITER ;
+-- 	IF userType != 'tutor' THEN
+-- 	ROLLBACK;
+-- 	END IF;
+-- END //;
+-- DELIMITER ;
 
 CREATE TABLE mentoring (
 	id INT AUTO_INCREMENT,
@@ -88,7 +88,7 @@ CREATE TABLE schedule (
 	id INT AUTO_INCREMENT,
 	date DATETIME NOT NULL,
 	mentoringId INT,
-	CONSTRAINT FOREIGN KEY (mentoringId) REFERENCES mentoring (id),
+	CONSTRAINT FOREIGN KEY (mentoringId) REFERENCES mentoring (id) ON DELETE CASCADE,
 	endsIn DATE NULL,
 	accessLink VARCHAR (300) NOT NULL,
 	isAccepted INT(1) DEFAULT 0,
@@ -101,11 +101,21 @@ CREATE TABLE mentoringRate (
 	scheduleId INT,
 	userId INT,
 	mentoringId INT,
-	CONSTRAINT FOREIGN KEY (mentoringId) REFERENCES mentoring (id),
-	CONSTRAINT FOREIGN KEY (scheduleId) REFERENCES schedule (id),
+	CONSTRAINT FOREIGN KEY (mentoringId) REFERENCES mentoring (id) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (scheduleId) REFERENCES schedule (id) ON DELETE CASCADE,
 	CONSTRAINT FOREIGN KEY (userId) REFERENCES user (id),
 	comment VARCHAR (300),
 	rate INT(5) DEFAULT 1,
 	score INT(5),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE announcements (
+	id INT AUTO_INCREMENT,
+	announcementDate DATETIME DEFAULT CURRENT_DATETIME NOT NULL,
+	mentoringId INT,
+	CONSTRAINT FOREIGN KEY (mentoringId) REFERENCES mentoring (id) ON DELETE CASCADE,
+	description VARCHAR (500) NOT NULL,
+
 	PRIMARY KEY (id)
 );

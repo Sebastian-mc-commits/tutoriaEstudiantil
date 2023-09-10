@@ -12,53 +12,88 @@ ViewsHelpers\secureView([
   "allowParams" => ["id"]
 ], $tree);
 
+require_once "../models/Mentoring.php";
+require_once "../models/Schedule.php";
+$id = $_GET["id"];
+$classI = new MentoringModel\Mentoring();
+$selectedClass = $classI->findOne([
+  "where" => [
+    $classI->id => [$id, "equal"]
+  ]
+], false, false);
+
+$scheduleI = new ScheduleModel\Schedule();
+
+$schedules = $scheduleI->findAll([
+  "where" => [
+    $scheduleI->mentoringId => [$selectedClass[$classI->idType], "equal"]
+  ]
+], false, false);
+
+// $scheduleI->isAccepted => [1, "equal"]
+$registeredUsersI = new RateModel\MentoringUserRate();
+
+$registeredUsers = $registeredUsersI->findAll([
+  "where" => [
+    $registeredUsersI->mentoringId => [$selectedClass[$classI->idType], "equal"]
+  ]
+]);
 ?>
 
 <link rel="stylesheet" href="../styles/sideBar.css">
 <link rel="stylesheet" href="../styles/mentor/render-created-class.css">
 <input type="checkbox" id="handleHideBar" hidden>
 <label for="handleHideBar" class="sideBarIcon hoverAnimation">&#9776;</label>
-<div class="sideBarContainer">
+<div class="sideBarContainer" id="mainContainer">
   <ul class="sideBarMethods">
-    <li>Estudiantes registrados: <strong>2</strong></li>
-    <li><button class="button hoverAnimation">Material de la clase</button></li>
-    <li>Cantidad de horarios <strong>5</strong></li>
+    <li data-global-id="<?php echo $selectedClass[$classI->idType] ?>">
+      Estudiantes registrados: <strong><?php echo $registeredUsers->num_rows; ?></strong>
+      <button data-global-type="getRegisteredUsers" class="button hoverAnimation">Info</button>
+    </li>
+    <li><button class="button hoverAnimation">Anunciar</button></li>
+    <li>Cantidad de horarios <strong><?php echo $schedules->num_rows; ?></strong></li>
     <li><button class="button hoverAnimation">Valoraciones de la clase</button></li>
   </ul>
 </div>
 <div class="contentBody">
-  <nav class="sectionRender">
+  <nav class="sectionRender" id="mainContainer">
     <section class="card schedulesRenderContainer">
       <h2>Fechas</h2>
-      <div class="schedulesRenderer">
-        <div class="card">
-          <p>Empieza <span class="textOpacity">12/06/56</span></p>
-          <p>Termina <span class="textOpacity">12/06/56</span></p>
-        </div>
-        <p class="card textOpacity opacityHover" data-global-type="addSchedule">
+      <div class="schedulesRenderer" data-global-id="<?php echo $selectedClass[$classI->idType]; ?>">
+        <?php
+        while ($row = $schedules->fetch_assoc()) {
+        ?>
+          <div class="card" data-date-id="<?php echo $row[$scheduleI->idType]; ?>">
+            <p>Empieza <span class="textOpacity"><?php echo $row[$scheduleI->dateType]; ?></span></p>
+            <p>Termina <span class="textOpacity"><?php echo $row[$scheduleI->endsInType]; ?></span></p>
+            <div class="sectionNeeds">
+              <button class="button danger" data-global-type="handleDeleteSchedule">Eliminar</button>
+              <button class="button primary" data-global-type="handleUpdateSchedule">Actualizar</button>
+            </div>
+          </div>
+        <?php
+        }
+        ?>
+        <p class="card textOpacity opacityHover" data-global-type="handleAddSchedule">
           Agregar Horario
         </p>
       </div>
     </section>
-    <section class="sectionNeeds">
-      <button class="button danger">Eliminar clase</button>
-      <button class="button primary">Actualizar</button>
+    <section class="sectionNeeds" data-global-id="<?php echo $selectedClass[$classI->idType]; ?>">
+      <button class="button danger" data-global-type="handleDeleteClass">Eliminar clase</button>
+      <button class="button primary" data-global-type="handleUpdateClass">Actualizar</button>
     </section>
     <section class="classDetail card">
-      <form action="">
-        <label for="">
+      <form id="classForm">
+        <label for="<?php echo $classI->mentoringName; ?>">
           <span>Nombre de la clase</span>
-          <input type="text" placeholder="Ciencias..." value="Class name" class="inputTitle">
+          <input type="text" name="<?php echo $classI->mentoringName; ?>" placeholder="Ciencias..." value="<?php echo $selectedClass[$classI->mentoringNameType]; ?>" class="inputTitle">
         </label>
-        <label for="">
-          <span>Link de la clase</span>
-          <input type="text" placeholder="meet" value="https//:meet">
-        </label>
-        <label for="">
+        <label for="<?php echo $classI->description; ?>">
           <span>Descripcion de la clase</span>
-          <textarea name="" id="" rows="10">A good description</textarea>
+          <textarea name="<?php echo $classI->description; ?>" id="" rows="10"><?php echo $selectedClass[$classI->descriptionType]; ?></textarea>
         </label>
-        
+
       </form>
     </section>
   </nav>

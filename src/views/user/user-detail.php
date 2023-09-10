@@ -35,7 +35,7 @@ $user = $userInstance->getUser();
   </div>
 
   <div class="card userOptions">
-    <h3 class="textOpacity"><?php echo $user->type; ?> Opciones</h3>
+    <h3 class="textOpacity">Opciones del rol: <?php echo $user->type; ?></h3>
     <?php
 if ($userInstance->studentType == $user->type) {
     include "user-options.php";

@@ -2,6 +2,14 @@ body {
   overflow: hidden;
 }
 
+.button {
+  cursor: pointer;
+  transition: opacity 0.5s;
+}
+
+.button:hover {
+  opacity: 0.7;
+}
 .suggestedSchedulesRender {
   left: 100%;
   background-color: var(--ISlateCharcoal);
@@ -112,4 +120,21 @@ body {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
+}
+
+.deleteButton {
+  background-color: var(--danger);
+  color: var(--white);
+  font-weight: bold;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.buttonContainer button {
+  flex: 1;
+  border-radius: 0;
 }

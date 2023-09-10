@@ -4,7 +4,7 @@ use \mysqli;
 
 class InitDb {
     private $defaultDatabase = "studenttutoring";
-    private $host = 'localhost';
+    private $host = '127.0.0.1';
     private $username = 'root';
     private $password = '98757682';
     private $instance;
