@@ -1,3 +1,8 @@
+.card-border-none {
+    padding: 1px 2rem !important;
+    margin-bottom: 2rem;
+}
+
 .sectionRender {
     display: flex;
     flex-direction: column;
@@ -56,4 +61,10 @@
     background-color: var(--ICeruleanBlue);
     color: var(--white);
     font-weight: bold;
+}
+
+.userDetail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

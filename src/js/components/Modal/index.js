@@ -135,15 +135,18 @@ export default class Modal extends Global {
     toggleOverlay(this.#overlayId);
   };
 
-  toggleModal = (onToggleModalParams = {}) => {
+  toggleModal = ({useDoneButton = true, ...onToggleModalParams}) => {
     if (!this.isModalBuild) return
 
     if (Object.keys(onToggleModalParams).length) {
+      const {modalFooter, ...components} = this._getComponent()
       for (const key in onToggleModalParams) {
         const object = onToggleModalParams[key]
 
-        object(this._getComponent()[key])
+        object(components[key])
       }
+
+      modalFooter.querySelector("button").disabled = !useDoneButton
     }
 
     const {
@@ -171,6 +174,7 @@ export default class Modal extends Global {
 
       const modalCloseTypes = ["modalFooterClose", "modalClose"]
       if (!modalCloseTypes.includes(dataset?.typeModal)) {
+        console.log("Modal close")
         this.onContentClick({
           target,
           dataset,

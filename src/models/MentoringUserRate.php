@@ -43,6 +43,7 @@ class MentoringUserRate extends IndexModel
     public $comment = "COMMENT";
     public $rate = "RATE";
     public $score = "SCORE";
+    public $id = "ID";
 
     private function getRegisteredMentoringQuery($tutorI, $specializationI, $userI, $scheduleI, $mentoringI)
     {
@@ -133,6 +134,36 @@ class MentoringUserRate extends IndexModel
             public function __construct($result)
             {
                 parent::__construct($result);
+            }
+        };
+    }
+
+    public function getRegisteredUsersOfClass ($classId) {
+
+        $userI = new User();
+        $query = "SELECT mr.*, us.name AS userName, us.email AS userEmail FROM $this->modelName mr"
+        .
+        " INNER JOIN $userI->modelName us ON mr.userId = us.id WHERE mr.mentoringId = $classId";
+
+        $result = null;
+        try {
+            $result = $this->getConnection()->query($query);
+            if (empty($result) || $result->num_rows == 0) {
+                return null;
+            }
+        } catch (Exception $e) {
+            return null;
+        }
+
+        $this->closeConnection();
+        return new class($result) extends RateModelTypes
+        {
+
+            public $result = null;
+            public function __construct($result)
+            {
+                parent::__construct();
+                $this->result = $result;
             }
         };
     }

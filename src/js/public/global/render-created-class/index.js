@@ -16,7 +16,7 @@ modal.onClose.onHandlerChangeValue = ({
     type
 }) => {
     
-    toggleModal()
+    toggleModal({})
     if (type === "done") {
         ops.contextMethods.current.onHandlerSuccessModal()
     }
@@ -27,6 +27,8 @@ modal.onClose.onHandlerChangeValue = ({
     ops.contextMethods.current.displayAlwaysOnModal()
 
 }
+
+modal.onContentClick = ops.onModalContentClick
 export default function () {
 
     return {

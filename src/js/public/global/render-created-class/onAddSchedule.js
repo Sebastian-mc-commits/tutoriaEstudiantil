@@ -27,8 +27,14 @@ export const handleAddSchedule = async ({
   getContextId,
   getFormData
 }) => {
+  contextMethods.current = {
+    ...contextMethods.current,
+    onHandlerSuccessModal: () =>
+      addSchedule(getContextId(false), getFormData, target)
+  };
+
   if (contextMethods.current.viewOfModals.isOnScheduleModalDisplaying) {
-    modal.toggleModal();
+    modal.toggleModal({});
     return;
   }
 
@@ -54,10 +60,7 @@ export const handleAddSchedule = async ({
     ...contextMethods.current,
     displayAlwaysOnModal: () => {
       disableLoader(target);
-    },
-
-    onHandlerSuccessModal: () =>
-      addSchedule(getContextId(false), getFormData, target)
+    }
   };
   contextMethods.current.activeModalView("isOnScheduleModalDisplaying");
 };

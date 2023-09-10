@@ -12,6 +12,7 @@ export const contextMethods = useSignalJs({
     displayAlwaysOnModal: () => {},
     viewOfModals: {
         isOnScheduleModalDisplaying: false,
+        isOnUsersRegisteredModalDisplaying: false
     },
     activeModalView: (view) => {
 
@@ -43,5 +44,16 @@ export const contextMethods = useSignalJs({
                 }
             }
         }
-    }
+    },
+
+    onModalContentClick: () => null
 })
+
+export const onModalContentClick = ({dataset, ...params}) => {
+    if (!!dataset.type) {
+        contextMethods.current.onModalContentClick({
+            dataset,
+            ...params
+        })
+    }
+}

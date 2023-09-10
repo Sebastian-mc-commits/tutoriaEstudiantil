@@ -11,7 +11,7 @@ import {
 export const addSchedule = ({
   target
 }) => {
-  modal.toggleModal()
+  modal.toggleModal({})
   contextApp.__current__ = {
     ...contextApp.current,
     scheduleTarget: target

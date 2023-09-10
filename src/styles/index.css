@@ -116,6 +116,13 @@ a {
   background-color: #fff;
 }
 
+.card-border-none {
+  border-radius: 8px;
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  background-color: #fff;
+}
+
 .borderCard {
   border-radius: var(--radius);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

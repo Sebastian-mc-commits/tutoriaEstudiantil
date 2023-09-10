@@ -1,17 +1,22 @@
-import { multipleFetch, domUtilities, navigation } from "../../../helpers/index.js"
-import {overlayMethods} from "../../../components/index.js"
+import { multipleFetch, domUtilities, navigation, useFetch, utilities } from "../../../helpers/index.js"
+import { modal } from "./index.js"
 
-const {toggleOverlay} = overlayMethods
-const {getFile} = navigation
+const { getFile } = navigation
 
-const {disableLoader, useLoader} = domUtilities
-export const getRegisteredUsers = async ({getContextId, target, context: {constants}}) => {
+const { disableLoader, useLoader, setHTML } = domUtilities
+const {getId} = utilities
+export const getRegisteredUsers = async ({ getContextId, target, context: { contextMethods } }) => {
+
+    if (contextMethods.current.viewOfModals.isOnUsersRegisteredModalDisplaying) {
+        modal.toggleModal({})
+        return
+    }
     const id = getContextId(false)
 
     useLoader(target)
-    const [{error, result}, {error: htmlError, extraDataReturn: componentHTML}] = await multipleFetch(
+    const [{ error, result }, { error: htmlError, extraDataReturn: componentHTML }] = await multipleFetch(
         {
-            url: `../controllers/Rate.php?type=getUsersRegisterdByClassId&classId=${id}`,
+            url: `../controllers/ClassController.php?type=getRegisteredUsersByClassIdJson&classId=${id}`,
         },
         {
             url: getFile("html/userDetail", "html", import.meta.url),
@@ -26,18 +31,74 @@ export const getRegisteredUsers = async ({getContextId, target, context: {consta
         return
     }
 
-    let HTML = ""
-    for (const userFields of result) {
-        const { element } = setHTML({
-            html: componentHTML,
-            iterator: (child, datasetValue) => child.textContent = userFields[datasetValue],
-        })
-        
-        HTML += element.outerHTML
+    let HTML = "<h3 class='card'>No hay usuarios registrados a esta clase</h3>"
+
+    const {users = []} = result
+    if (users.length) {
+        HTML = ""
+        for (const { id, ...userFields } of users) {
+            const { element } = setHTML({
+                html: componentHTML,
+                iterator: (child, datasetValue) => {
+
+                    if (datasetValue === "id") {
+                        child.dataset.id = id
+                    }
+                    else {
+
+                        child.textContent = userFields[datasetValue]
+                    }
+                }
+            })
+
+            HTML += element.outerHTML
+        }
     }
 
-    toggleOverlay(constants().overlayId)
+    modal.toggleModal({
+        modalBody: target => target.innerHTML = `
+        <nav>
+            ${HTML}
+        </nav>`,
+        modalHeader: target => target.firstElementChild.textContent = "Usuarios registrados",
+        useDoneButton: false
+    })
 
-    
+    contextMethods.current.onModalContentClick = (params) => {
 
+        const userOptions = {
+            onRemoveUser,
+            onSelectUser
+        }
+
+        const exec = userOptions[params.dataset.type]
+        return typeof exec === "function" ? exec(params) : null
+    }
+
+    contextMethods.current.activeModalView("isOnUsersRegisteredModalDisplaying")
+}
+
+const onSelectUser = () => {}
+
+const onRemoveUser = async ({target}) => {
+
+    useLoader(target)
+    const userId = target.closest("[data-id]")
+    const {error, result: {isRemoved}} = await useFetch({
+        url: "../controllers/ClassController.php?type=removeUserOfClassJson",
+        fetchObject: {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "DELETE",
+            body: JSON.stringify({
+                userId: getId(userId.dataset.id)
+            })
+        }
+    })
+
+    disableLoader(target)
+    if (error || !isRemoved) return
+
+    userId.remove()
 }

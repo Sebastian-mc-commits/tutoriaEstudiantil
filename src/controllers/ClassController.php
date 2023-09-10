@@ -121,6 +121,38 @@ if ($tutor != null) {
         ]);
         exit;
     }
+
+    case "getRegisteredUsersByClassIdJson": {
+      require_once "../models/MentoringUserRate.php";
+      $id = $_GET["classId"];
+
+      $rateI = new RateModel\MentoringUserRate();
+      $users = $rateI->getRegisteredUsersOfClass($id);
+
+      header("Content-type: application/json");
+        echo json_encode([
+          "users" => Controller\parseMysqlDataToJson($users->result),
+        ]);
+        exit;
+    }
+
+    case "removeUserOfClassJson": {
+      require_once "../models/MentoringUserRate.php";
+      ["userId" => $id] = Controller\getJson();
+
+      $rateI = new RateModel\MentoringUserRate();
+      $isRemoved = $rateI->delete([
+        "where" => [
+          $rateI->id => [$id, "equal"]
+        ]
+      ]);
+
+      header("Content-type: application/json");
+        echo json_encode([
+          "isRemoved" => $isRemoved,
+        ]);
+        exit;
+    }
     default:
       break;
   }

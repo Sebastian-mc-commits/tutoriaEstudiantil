@@ -4,7 +4,7 @@ import { modal } from "./index.js"
 export const suggestSchedule = ({ getContextId, target }) => {
 
     if (!modal.isModalBuild) return
-    modal.toggleModal()
+    modal.toggleModal({})
     contextApp.current = {
         ...contextApp.current,
         mentoringId: getContextId(false),
